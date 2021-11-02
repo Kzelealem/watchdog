@@ -51,6 +51,10 @@ io.of("/meta").on("connection", (socket) => {
                 var containerName = config.Name;
                 var containerState = config.State.Running;
                 var fname = path.join(pathToContainers, containerID, containerID+'-json.log');
+                
+                if containerName == "" {
+                    containerName = config.Labels["com.docker.stack.namespace"]
+                }
     
                 meta[containerID] = {
                     id: containerID,
